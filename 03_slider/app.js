@@ -10,13 +10,15 @@ const slidesCount = mainSlide.querySelectorAll('div').length
 let activeSlideIndex = 0
 sidebar.style.top = `-${(slidesCount - 1) * 100}vh`
 
-
+document.addEventListener('keydown', event => {
+    event.key === 'ArrowUp' && changeSlide('up')
+    event.key === 'ArrowDown' && changeSlide('down')
+})
 
 function changeSlide(direction) {
     direction === 'up' ? activeSlideIndex = ++activeSlideIndex % slidesCount : true
     direction === 'down' ? activeSlideIndex ? --activeSlideIndex : activeSlideIndex = slidesCount - 1 : true
     const height = container.clientHeight
-    console.log(activeSlideIndex, height)
     mainSlide.style.transform = `translateY(-${(activeSlideIndex) * height}px)`
     sidebar.style.transform = `translateY(${(activeSlideIndex) * height}px)`
 }
